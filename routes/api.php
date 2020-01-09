@@ -23,7 +23,7 @@ Route::delete('category/delete/{id}','Api\CategoryController@destroy');
 Route::get('category/edit/{id}','Api\CategoryController@edit');
 Route::put('category/update/{id}','Api\CategoryController@update');
 
-
+// api controler for posting new article
 Route::get('post','Api\PostController@index');
 Route::post('post/store','Api\PostController@store');
 Route::delete('post/delete/{id}','Api\PostController@destroy');

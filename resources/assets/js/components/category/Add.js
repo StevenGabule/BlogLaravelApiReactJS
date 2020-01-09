@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SuccessAlert from './SuccessAlert';
 import ErrorAlert from './ErrorAlert';
-
+import {Router, Link} from 'react-router-dom';
 export default class Add extends Component {
 
     constructor() {
@@ -29,9 +29,10 @@ export default class Add extends Component {
 
         axios.post('http://127.0.0.1:8000/api/category/store', category)
             .then(res => {
-                this.setState({ alert_message: "success" })
+                // this.setState({ alert_message: "success" })
+                history.push('/post');
             }).catch(error => {
-                this.setState({ alert_message: "error" });
+               //  this.setState({ alert_message: "error" });
             })
     }
 

@@ -15,8 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/{path}',function(){
-    return view('welcome');
-})->where('path','.*');
+Route::view('/{path}','welcome')->where('path','.*');
 
 
+    

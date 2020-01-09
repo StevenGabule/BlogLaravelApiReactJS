@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SuccessAlert from './SuccessAlert';
 import ErrorAlert from './ErrorAlert';
+ class Add extends Component {
 
-export default class Add extends Component {
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -32,6 +31,7 @@ export default class Add extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        const { history } = this.props;
         const post = {
             title: this.state.title,
             description: this.state.description
@@ -39,12 +39,12 @@ export default class Add extends Component {
 
         axios.post('http://127.0.0.1:8000/api/post/store', post)
             .then(res => {
-                this.setState({ alert_message: "success" })
+                // this.setState({ alert_message: "success" })
+                history.push('/post')
             }).catch(error => {
                 this.setState({ alert_message: "error" });
             })
-
-    }
+    }   
 
     render() {
         return (
@@ -64,8 +64,6 @@ export default class Add extends Component {
                             placeholder="Enter title" />
                     </div>
 
-
-
                     <div className="form-group">
                         <label htmlFor="title">Description</label>
                         <textarea className="form-control"
@@ -83,3 +81,4 @@ export default class Add extends Component {
         );
     }
 }
+export default Add;

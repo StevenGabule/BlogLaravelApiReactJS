@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $result = Post::paginate(2);
+        $result = Post::paginate(15);
         return $result;
     }
 

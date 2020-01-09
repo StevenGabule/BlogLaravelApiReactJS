@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import SuccessAlert from './SuccessAlert';
 import ErrorAlert from './ErrorAlert';
-
+import moment from 'moment'
 export default class Listing extends Component {
 
     constructor() {
@@ -20,7 +20,7 @@ export default class Listing extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         axios.get('http://127.0.0.1:8000/api/post')
             .then(response => {
                 this.setState({
@@ -50,7 +50,7 @@ export default class Listing extends Component {
             .then(response => {
 
                 var posts = this.state.posts;
-
+                console.log(posts.length)
                 for (var i = 0; i < posts.length; i++) {
                     if (posts[i].id == post_id) {
                         posts.splice(i, 1);
@@ -72,13 +72,12 @@ export default class Listing extends Component {
                 {this.state.alert_message == "success" ? <SuccessAlert message={"Post deleted successfully."} /> : null}
                 {this.state.alert_message == "error" ? <ErrorAlert message={"Error occured while deleting the post."} /> : null}
 
-                <table className="table">
+                <table className="table table-sm table-striped small">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" width="15%">Title</th>
+                            <th scope="col" width="55%">Description</th>
+                            <th scope="col" width="8">Status</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
                             <th scope="col">Action</th>
@@ -89,11 +88,10 @@ export default class Listing extends Component {
                             this.state.posts.map(post => {
                                 return (
                                     <tr key={post.id}>
-                                        <th scope="row">1</th>
                                         <td>{post.title}</td>
                                         <td>{post.description}</td>
                                         <td>{post.active == 1 ? ("Active") : ("InActive")}</td>
-                                        <td>{post.created_at}</td>
+                                        <td>{moment(post.created_at, 'YYYYMMDD').fromNow()}</td>
                                         <td>{post.updated_at}</td>
                                         <td>
                                             <Link to={`/post/edit/${post.id}`}>Edit</Link> |
