@@ -22,7 +22,7 @@
     "react-dom": "^16.8.0"
   },
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react-data-table-component": "^6.2.0",
     "react-js-pagination": "^3.0.2",
     "react-paginate": "^5.2.3",
